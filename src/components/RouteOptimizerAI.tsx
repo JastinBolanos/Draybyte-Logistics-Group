@@ -246,7 +246,7 @@ export const RouteOptimizerAI: React.FC<RouteOptimizerAIProps> = ({
               </h3>
             </div>
             <span className="text-[10px] bg-indigo-50 text-indigo-700 border border-indigo-200 px-1.5 py-0.5 rounded font-mono font-semibold">
-              Gemini 2.5 Logic Core
+              Neural Dispatch Core
             </span>
           </div>
 
