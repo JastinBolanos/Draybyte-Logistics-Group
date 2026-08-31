@@ -6,6 +6,25 @@ export function useNavigationState() {
   const [activeTab, setActiveTab] = useState<ActiveTab>('fleet');
   const [isDense, setIsDense] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState<string>('');
+  const [isSidebarExpanded, setIsSidebarExpanded] = useState<boolean>(() => {
+    try {
+      return localStorage.getItem('sidebar_expanded') === 'true';
+    } catch {
+      return false;
+    }
+  });
+
+  const toggleSidebar = useCallback(() => {
+    setIsSidebarExpanded((prev) => {
+      const next = !prev;
+      try {
+        localStorage.setItem('sidebar_expanded', String(next));
+      } catch {
+        // ignore
+      }
+      return next;
+    });
+  }, []);
 
   // Modals state
   const [isNewShipmentOpen, setIsNewShipmentOpen] = useState<boolean>(false);
@@ -47,6 +66,9 @@ export function useNavigationState() {
     setIsDense,
     searchQuery,
     setSearchQuery,
+    isSidebarExpanded,
+    setIsSidebarExpanded,
+    toggleSidebar,
     isNewShipmentOpen,
     handleOpenNewShipment,
     handleCloseNewShipment,

@@ -69,6 +69,8 @@ export default function App() {
     setIsDense,
     searchQuery,
     setSearchQuery,
+    isSidebarExpanded,
+    toggleSidebar,
     isNewShipmentOpen,
     handleOpenNewShipment,
     handleCloseNewShipment,
@@ -119,6 +121,11 @@ export default function App() {
         activeTab={activeTab}
         onSelectTab={setActiveTab}
         onOpenWelcome={handleOpenWelcome}
+        isExpanded={isSidebarExpanded}
+        onToggleExpanded={toggleSidebar}
+        onNewShipment={handleOpenNewShipment}
+        onScanBarcode={handleOpenScanModal}
+        kpis={kpis}
       />
 
       {/* Main Content Workspace */}
@@ -145,6 +152,8 @@ export default function App() {
             handleSignOut();
             handleOpenWelcome();
           }}
+          isSidebarExpanded={isSidebarExpanded}
+          onToggleSidebar={toggleSidebar}
         />
 
         {/* Dynamic Domain Views */}

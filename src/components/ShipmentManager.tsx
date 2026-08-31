@@ -197,7 +197,13 @@ export const ShipmentManager: React.FC<ShipmentManagerProps> = ({
     { day: 'Jue', programados: 162, entregados: 159, otd: 98.1, retrasos: 3 },
     { day: 'Vie', programados: 180, entregados: 174, otd: 96.6, retrasos: 6 },
     { day: 'Sab', programados: 110, entregados: 109, otd: 99.0, retrasos: 1 },
-    { day: 'Hoy', programados: shipments.length, entregados: shipments.filter(s => s.status === 'delivered').length, otd: 97.8, retrasos: shipments.filter(s => s.status === 'exception').length }
+    {
+      day: 'Hoy',
+      programados: 124 + shipments.length,
+      entregados: 121 + shipments.filter(s => s.status === 'delivered' || s.status === 'in_transit').length,
+      otd: 97.8,
+      retrasos: Math.max(1, shipments.filter(s => s.status === 'exception').length)
+    }
   ];
 
   const cargoDistributionData = [
@@ -1049,7 +1055,7 @@ export const ShipmentManager: React.FC<ShipmentManagerProps> = ({
                                   </div>
 
                                   <div className="mt-3 pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500">
-                                    <span>GPS Ping: <strong className="text-slate-700">En vivo (4G LTE)</strong></span>
+                                    <span>GPS Ping: <strong className="text-slate-700">Activo (4G LTE)</strong></span>
                                   </div>
                                 </div>
 

@@ -13,7 +13,10 @@ import {
   Play,
   Pause,
   Clock,
-  RefreshCw
+  RefreshCw,
+  PanelLeftClose,
+  PanelLeftOpen,
+  Menu
 } from 'lucide-react';
 import { SupplyChainKPIs } from '../types/logistics';
 import { UserSession } from './AuthModal';
@@ -39,6 +42,8 @@ interface HeaderProps {
   userSession?: UserSession | null;
   onOpenAuth?: (mode?: 'login' | 'register') => void;
   onSignOut?: () => void;
+  isSidebarExpanded?: boolean;
+  onToggleSidebar?: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -58,7 +63,9 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenWelcome,
   userSession,
   onOpenAuth,
-  onSignOut
+  onSignOut,
+  isSidebarExpanded = false,
+  onToggleSidebar
 }) => {
   const { t } = useLanguage();
 
@@ -74,77 +81,93 @@ export const Header: React.FC<HeaderProps> = ({
   return (
     <header className="bg-white border-b border-slate-200 sticky top-0 z-30 shrink-0">
       {/* Top Telemetry Ticker Bar */}
-      <div className="bg-slate-900 text-slate-400 text-xs px-6 sm:px-8 py-1.5 flex flex-wrap items-center justify-between border-b border-slate-800 gap-2">
+      <div className="bg-slate-100 text-slate-600 text-xs px-6 sm:px-8 py-1.5 flex flex-wrap items-center justify-between border-b border-slate-200 gap-2">
         <div className="flex items-center space-x-4">
           <div className="flex items-center space-x-2">
             <span className="relative flex h-2 w-2">
               <span className={`animate-ping absolute inline-flex h-full w-full rounded-full ${isSimulating ? 'bg-emerald-400' : 'bg-amber-400'} opacity-75`}></span>
               <span className={`relative inline-flex rounded-full h-2 w-2 ${isSimulating ? 'bg-emerald-500' : 'bg-amber-500'}`}></span>
             </span>
-            <span className="font-semibold text-slate-200 uppercase tracking-wider text-[10px]">
+            <span className="font-semibold text-slate-800 uppercase tracking-wider text-[10px]">
               {t.header.telemetryCore}
             </span>
-            <span className="bg-slate-800 text-slate-300 px-1.5 py-0.5 rounded text-[10px] font-mono border border-slate-700">
+            <span className="bg-white text-slate-700 px-1.5 py-0.5 rounded text-[10px] font-mono border border-slate-200 shadow-2xs">
               {t.header.corridorTag}
             </span>
           </div>
 
-          <div className="hidden lg:flex items-center space-x-3 text-slate-400 text-[11px] border-l border-slate-800 pl-3">
-            <span>{t.header.activeFleet} <strong className="text-white font-mono">{kpis.fleetInTransit} {t.units}</strong></span>
-            <span className="text-slate-700">•</span>
-            <span>{t.header.otdPunctuality} <strong className="text-emerald-400 font-mono">{kpis.onTimeDeliveryRate}%</strong></span>
-            <span className="text-slate-700">•</span>
-            <span>{t.header.hubOccupancy} <strong className="text-indigo-300 font-mono">{kpis.warehouseUtilizationAvg}%</strong></span>
-            <span className="text-slate-700">•</span>
-            <span>{t.header.valueInTransit} <strong className="text-white font-mono">${(kpis.totalInventoryValuationUsd / 1000000).toFixed(2)}M USD</strong></span>
+          <div className="hidden lg:flex items-center space-x-3 text-slate-500 text-[11px] border-l border-slate-200 pl-3">
+            <span>{t.header.activeFleet} <strong className="text-slate-800 font-mono">{kpis.fleetInTransit} {t.units}</strong></span>
+            <span className="text-slate-300">•</span>
+            <span>{t.header.otdPunctuality} <strong className="text-emerald-600 font-mono font-semibold">{kpis.onTimeDeliveryRate}%</strong></span>
+            <span className="text-slate-300">•</span>
+            <span>{t.header.hubOccupancy} <strong className="text-indigo-600 font-mono font-semibold">{kpis.warehouseUtilizationAvg}%</strong></span>
+            <span className="text-slate-300">•</span>
+            <span>{t.header.valueInTransit} <strong className="text-slate-800 font-mono">${(kpis.totalInventoryValuationUsd / 1000000).toFixed(2)}M USD</strong></span>
           </div>
         </div>
 
         <div className="flex items-center space-x-3 text-[11px]">
-          <div className="flex items-center space-x-1 text-slate-400">
+          <div className="flex items-center space-x-1 text-slate-500">
             <Clock className="w-3 h-3 text-slate-400" />
-            <span className="font-mono">{lastSyncTime}</span>
+            <span className="font-mono text-slate-700">{lastSyncTime}</span>
           </div>
 
           <button
             onClick={() => setIsSimulating(!isSimulating)}
             title={isSimulating ? "Pausar telemetría" : "Iniciar telemetría"}
             className={`flex items-center space-x-1 px-2 py-0.5 rounded text-[10px] font-medium transition-colors cursor-pointer ${
-              isSimulating ? 'bg-emerald-950/80 text-emerald-300 border border-emerald-700/60 hover:bg-emerald-900' : 'bg-amber-950/80 text-amber-300 border border-amber-700/60 hover:bg-amber-900'
+              isSimulating ? 'bg-emerald-50 text-emerald-700 border border-emerald-300 hover:bg-emerald-100' : 'bg-amber-50 text-amber-700 border border-amber-300 hover:bg-amber-100'
             }`}
           >
-            {isSimulating ? <Pause className="w-3 h-3 text-emerald-400" /> : <Play className="w-3 h-3 text-amber-400" />}
+            {isSimulating ? <Pause className="w-3 h-3 text-emerald-600" /> : <Play className="w-3 h-3 text-amber-600" />}
             <span>{isSimulating ? t.header.liveTelemetry : t.header.pausedTelemetry}</span>
           </button>
 
           <button
             onClick={onManualRefresh}
             title={t.refresh}
-            className="p-1 text-slate-400 hover:text-white rounded hover:bg-slate-800 transition-colors cursor-pointer"
+            className="p-1 text-slate-500 hover:text-slate-800 rounded hover:bg-slate-200 transition-colors cursor-pointer"
           >
             <RefreshCw className="w-3 h-3" />
           </button>
 
           {/* Compact language switcher in ticker */}
-          <div className="border-l border-slate-700 pl-2">
+          <div className="border-l border-slate-200 pl-2">
             <LanguageToggle variant="compact" />
           </div>
         </div>
       </div>
 
       {/* Main Command Header Bar */}
-      <div className="h-16 px-6 sm:px-8 flex items-center justify-between gap-4 bg-white">
-        <div className="flex items-center gap-4">
-          <div className="flex items-center space-x-3">
+      <div className="h-16 px-4 sm:px-6 md:px-8 flex items-center justify-between gap-3 sm:gap-4 bg-white">
+        <div className="flex items-center gap-3 sm:gap-4 overflow-hidden">
+          <div
+            className={`flex items-center space-x-3 transition-all duration-300 ease-in-out overflow-hidden ${
+              isSidebarExpanded
+                ? 'opacity-0 max-w-0 -translate-x-6 pointer-events-none invisible'
+                : 'opacity-100 max-w-[500px] translate-x-0 visible'
+            }`}
+          >
             <button
               onClick={onOpenWelcome}
               title={t.header.mainPortal}
-              className="text-left group cursor-pointer flex items-center gap-2.5"
+              className="text-left group cursor-pointer flex items-center gap-2.5 shrink-0"
             >
-              <span className="font-seal text-xs bg-slate-950 text-white w-7 h-7 rounded-md flex items-center justify-center font-bold group-hover:bg-indigo-600 transition-colors">
-                DB
-              </span>
-              <div>
+              <div className="relative flex items-center justify-center shrink-0">
+                {/* Expansive soft backlighting glow */}
+                <div className="absolute -inset-2 rounded-xl bg-indigo-500/20 blur-md animate-logo-aura pointer-events-none" />
+                
+                {/* Matching color orbital ribbon loops */}
+                <div className="absolute -inset-[1.5px] rounded-lg overflow-hidden pointer-events-none">
+                  <div className="w-[200%] h-[200%] absolute -top-1/2 -left-1/2 animate-logo-spin bg-[conic-gradient(from_0deg,transparent_0_240deg,#4338ca_300deg,#6366f1_340deg,#312e81_360deg)] opacity-80" />
+                </div>
+
+                <span className="relative z-10 font-seal text-xs bg-indigo-600 group-hover:bg-indigo-700 text-white w-7 h-7 rounded-lg flex items-center justify-center font-bold shadow-xs transition-colors">
+                  DB
+                </span>
+              </div>
+              <div className="whitespace-nowrap">
                 <h1 className="text-sm sm:text-base font-bold text-slate-900 tracking-tight group-hover:text-indigo-600 transition-colors">
                   {t.header.brandTitle}
                 </h1>
@@ -154,7 +177,7 @@ export const Header: React.FC<HeaderProps> = ({
               </div>
             </button>
 
-            <span className="hidden sm:flex px-2.5 py-0.5 bg-emerald-50 text-emerald-700 text-xs font-medium rounded-full border border-emerald-200/80 items-center gap-1.5 font-mono-tech">
+            <span className="hidden sm:flex px-2.5 py-0.5 bg-emerald-50 text-emerald-700 text-xs font-medium rounded-full border border-emerald-200/80 items-center gap-1.5 font-mono-tech shrink-0 whitespace-nowrap">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
               {t.header.systemsOnline}
             </span>
@@ -223,10 +246,6 @@ export const Header: React.FC<HeaderProps> = ({
           {/* User Profile / Demo Mode Status */}
           {userSession?.isDemo ? (
             <div className="flex items-center space-x-2 pl-1">
-              <div className="hidden xl:flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-indigo-50 border border-indigo-200 text-indigo-800 text-[11px] font-mono-tech">
-                <span className="w-2 h-2 rounded-full bg-indigo-500 animate-pulse" />
-                <span>{t.auth.demoBannerText}</span>
-              </div>
               <button
                 onClick={() => onOpenAuth?.('login')}
                 id="btn-header-login"

@@ -49,7 +49,7 @@ export const translations = {
       brandSubtitle: 'Torre de Mando & Telemetría Logística Global',
       gnssClock: 'Hora Oficial Red GNSS',
       syncClock: 'Sincronizando reloj atómico...',
-      systemStatus: 'SISTEMA 100% OPERATIVO',
+      systemStatus: 'OPERATIVO',
       badgeEyebrow: 'CENTRO DE OPERACIONES & CONTROL DE CADENA DE SUMINISTRO',
       titleItalic: 'Bienvenido al Sistema Central de',
       titleBold: 'Mando Logístico & Tráfico',
@@ -68,13 +68,13 @@ export const translations = {
       kpiWarehouseSub: '220,000 m² en 4 Hubs',
 
       // Direct Modules Launch
-      quickLaunchTitle: 'Acceso Rápido por Módulo Operativo',
-      quickLaunchSubtitle: 'Haga clic en cualquier módulo para abrir directamente',
+      quickLaunchTitle: 'Conoce los Módulos Operativos con una Demostración',
+      quickLaunchSubtitle: 'Haga clic en cualquier módulo para iniciar la demostración interactiva',
       startModule: 'Iniciar módulo',
 
       moduleFleetTitle: 'Monitoreo Satelital de Flota',
       moduleFleetSub: 'unidades en tránsito activo con telemetría IoT 5G',
-      moduleFleetTag: 'TELEMETRÍA EN VIVO',
+      moduleFleetTag: 'TELEMETRÍA',
 
       moduleShipmentsTitle: 'Gestión de Envíos & SAT CFDI 4.0',
       moduleShipmentsSub: 'despachos en ruta con Carta Porte y cadena de custodia',
@@ -131,7 +131,7 @@ export const translations = {
       requestRegistration: 'Solicitar Registro de Cuenta',
       notClientPrompt: '¿No eres cliente y necesitas conocer la app?',
       viewTelemetryDemo: 'Ver Telemetría Satelital Demostración',
-      viewTelemetryNote: 'Acceso libre e inmediato para explorar el mapa en vivo, telemetría IoT, KPIs y despacho satelital sin requerir cuenta.',
+      viewTelemetryNote: 'Acceso libre e inmediato para explorar el mapa, telemetría IoT, KPIs y despacho satelital sin requerir cuenta.',
 
       // Registration Form
       registerTitle: 'Solicitud de Registro Corporativo',
@@ -167,7 +167,7 @@ export const translations = {
       // Registration Success / Manual Validation Notice
       successTitle: '¡Solicitud Registrada con Éxito!',
       successNotice: 'Su solicitud ha sido enviada al equipo de Soporte y Validación de Seguridad.',
-      successMessage: 'Para garantizar la integridad y seguridad de la red de transporte satelital, nuestro equipo de soporte técnico validará manualmente los datos de su empresa y le emitirá sus credenciales de acceso institucional en un plazo de 2 a 4 horas hábiles.',
+      successMessage: 'Para garantizar la integridad y seguridad de la red de transporte satelital, nuestro equipo de soporte técnico validará manualmente los datos de su empresa y le emitirá sus credenciales de acceso institucional en un plazo de entre 24 a 48 horas hábiles.',
       successEmailSent: 'Recibirá la confirmación y credenciales en:',
       successExploreNow: 'Ver Telemetría Satelital Demostración',
       successReturnLogin: 'Regresar al Inicio de Sesión',
@@ -180,7 +180,7 @@ export const translations = {
 
     // Header & Navigation
     header: {
-      brandTitle: 'Draybyte Logistics Control Tower',
+      brandTitle: 'Draybyte Logistics',
       brandSubtitle: 'Mando Central de Flota & Tráfico',
       telemetryCore: 'Draybyte Telemetry Core',
       corridorTag: 'CORREDOR LOGÍSTICO LATAM',
@@ -188,9 +188,9 @@ export const translations = {
       otdPunctuality: 'OTD Puntualidad:',
       hubOccupancy: 'Ocupación Hubs:',
       valueInTransit: 'Valor en Tránsito:',
-      liveTelemetry: 'Telemetría En Vivo',
+      liveTelemetry: 'Telemetría Activa',
       pausedTelemetry: 'Pausado',
-      systemsOnline: 'Sistemas Online',
+      systemsOnline: 'Operativo',
       mainPortal: '🏛️ Portal Principal',
       searchPlaceholder: 'Buscar envío, vehículo, SKU...',
       scanButton: 'Escanear',
@@ -205,7 +205,7 @@ export const translations = {
       tabAnalytics: 'KPIs & Métricas'
     },
 
-    // Side Navigation Rail
+    // Side Navigation Rail & Expandable Tray
     sidebar: {
       fleet: 'Flota',
       shipments: 'Envíos',
@@ -215,7 +215,21 @@ export const translations = {
       analytics: 'Métricas',
       home: 'Inicio',
       help: 'Ayuda',
-      settings: 'Ajustes'
+      settings: 'Ajustes',
+      openTray: 'Abrir Bandeja',
+      closeTray: 'Contraer Bandeja',
+      expandMenu: 'Expandir Menú Completo',
+      collapseMenu: 'Contraer a Iconos',
+      navigationTray: 'Bandeja de Navegación',
+      operationalModules: 'Módulos Operativos',
+      quickActions: 'Acciones Rápidas',
+      satelliteStatus: 'Red GNSS Cifrada',
+      fleetDesc: 'Telemetría satelital continua',
+      shipmentsDesc: 'Guías & SAT CFDI 4.0',
+      inventoryDesc: 'Gestión WMS en 4 Hubs',
+      incidentsDesc: 'Protocolos de riesgo',
+      optimizerDesc: 'Copiloto predictivo IA',
+      analyticsDesc: 'Auditoría & KPIs'
     },
 
     // Fleet Monitor
@@ -630,7 +644,7 @@ export const translations = {
       brandSubtitle: 'Global Logistics Command Tower & Telemetry',
       gnssClock: 'Official GNSS Network Time',
       syncClock: 'Syncing atomic clock...',
-      systemStatus: 'SYSTEM 100% OPERATIONAL',
+      systemStatus: 'OPERATIONAL',
       badgeEyebrow: 'OPERATIONS COMMAND & SUPPLY CHAIN CONTROL TOWER',
       titleItalic: 'Welcome to the Central Command for',
       titleBold: 'Logistics & Traffic Management',
@@ -649,13 +663,13 @@ export const translations = {
       kpiWarehouseSub: '220,000 m² across 4 Hubs',
 
       // Direct Modules Launch
-      quickLaunchTitle: 'Quick Access by Operational Module',
-      quickLaunchSubtitle: 'Click any module card to launch directly into that workspace',
+      quickLaunchTitle: 'Explore Operational Modules with a Demonstration',
+      quickLaunchSubtitle: 'Click any module card to start the interactive demonstration',
       startModule: 'Launch module',
 
       moduleFleetTitle: 'Satellite Fleet Telemetry',
       moduleFleetSub: 'active units in transit with 5G IoT telemetry',
-      moduleFleetTag: 'LIVE TELEMETRY',
+      moduleFleetTag: 'TELEMETRY',
 
       moduleShipmentsTitle: 'Shipment Tracking & SAT CFDI 4.0',
       moduleShipmentsSub: 'dispatches en route with digital Bill of Lading & chain of custody',
@@ -748,7 +762,7 @@ export const translations = {
       // Registration Success / Manual Validation Notice
       successTitle: 'Request Registered Successfully!',
       successNotice: 'Your registration request has been forwarded to Support & Security Validation.',
-      successMessage: 'To maintain the highest level of security and supply chain network integrity, our technical support team manually verifies company credentials and will issue your access within 2 to 4 business hours.',
+      successMessage: 'To maintain the highest level of security and supply chain network integrity, our technical support team manually verifies company credentials and will issue your access within 24 to 48 business hours.',
       successEmailSent: 'Confirmation and activation details will be sent to:',
       successExploreNow: 'View Satellite Telemetry Demonstration',
       successReturnLogin: 'Return to Sign In',
@@ -761,7 +775,7 @@ export const translations = {
 
     // Header & Navigation
     header: {
-      brandTitle: 'Draybyte Logistics Control Tower',
+      brandTitle: 'Draybyte Logistics',
       brandSubtitle: 'Central Fleet & Traffic Command',
       telemetryCore: 'Draybyte Telemetry Core',
       corridorTag: 'LATAM LOGISTICS CORRIDOR',
@@ -771,7 +785,7 @@ export const translations = {
       valueInTransit: 'Value in Transit:',
       liveTelemetry: 'Live Telemetry',
       pausedTelemetry: 'Paused',
-      systemsOnline: 'Systems Online',
+      systemsOnline: 'Operational',
       mainPortal: '🏛️ Main Portal',
       searchPlaceholder: 'Search shipment, vehicle, SKU...',
       scanButton: 'Scan',
@@ -786,7 +800,7 @@ export const translations = {
       tabAnalytics: 'KPIs & Analytics'
     },
 
-    // Side Navigation Rail
+    // Side Navigation Rail & Expandable Tray
     sidebar: {
       fleet: 'Fleet',
       shipments: 'Shipments',
@@ -796,7 +810,21 @@ export const translations = {
       analytics: 'Analytics',
       home: 'Home',
       help: 'Help',
-      settings: 'Settings'
+      settings: 'Settings',
+      openTray: 'Open Tray',
+      closeTray: 'Collapse Tray',
+      expandMenu: 'Expand Full Menu',
+      collapseMenu: 'Collapse to Icons',
+      navigationTray: 'Navigation Tray',
+      operationalModules: 'Operational Modules',
+      quickActions: 'Quick Actions',
+      satelliteStatus: 'Encrypted GNSS Network',
+      fleetDesc: 'Live satellite telemetry',
+      shipmentsDesc: 'Waybills & SAT CFDI 4.0',
+      inventoryDesc: 'WMS Hubs & Stock',
+      incidentsDesc: 'Risk triage & protocols',
+      optimizerDesc: 'Predictive AI copilot',
+      analyticsDesc: 'Executive BI & KPIs'
     },
 
     // Fleet Monitor

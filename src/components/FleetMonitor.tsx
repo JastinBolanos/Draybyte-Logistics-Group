@@ -44,6 +44,7 @@ import {
 import { Vehicle, FleetStatus, CargoType } from '../types/logistics';
 import { LOGISTICS_PHOTOS } from '../data/logisticsImages';
 import { useLanguage } from '../i18n/LanguageContext';
+import { InteractiveGISMap } from './InteractiveGISMap';
 
 interface FleetMonitorProps {
 
@@ -155,27 +156,6 @@ export const FleetMonitor: React.FC<FleetMonitorProps> = ({
         return <span className="text-slate-700 bg-slate-100 border border-slate-200 text-[10px] px-1.5 py-0.5 rounded font-medium">📦 {t.cargoTypes.standard}</span>;
     }
   };
-
-  // Map coordinates scaling helper for vector GIS map
-  const projectToMap = (lat: number, lng: number) => {
-    const minLat = 18.0;
-    const maxLat = 28.5;
-    const minLng = -105.5;
-    const maxLng = -95.5;
-
-    const x = ((lng - minLng) / (maxLng - minLng)) * 680 + 40;
-    const y = ((maxLat - lat) / (maxLat - minLat)) * 360 + 30;
-    return { x: Math.max(30, Math.min(730, x)), y: Math.max(20, Math.min(390, y)) };
-  };
-
-  const hubLocations = [
-    { id: 'cdmx', name: 'Hub CDMX Vallejo', lat: 19.4326, lng: -99.1332, color: '#6366f1' },
-    { id: 'mty', name: 'Hub Monterrey Norte', lat: 25.6866, lng: -100.3161, color: '#10b981' },
-    { id: 'gdl', name: 'Hub Guadalajara Bajío', lat: 20.6597, lng: -103.3496, color: '#8b5cf6' },
-    { id: 'mzn', name: 'Puerto Manzanillo', lat: 19.0522, lng: -104.3159, color: '#0ea5e9' },
-    { id: 'ver', name: 'Puerto Veracruz', lat: 19.1738, lng: -96.1342, color: '#f97316' },
-    { id: 'lar', name: 'Aduana Nuevo Laredo', lat: 27.4864, lng: -99.5083, color: '#ef4444' }
-  ];
 
   // Mock mini speed sparkline data for selected vehicle
   const speedHistoryData = [
@@ -624,201 +604,14 @@ export const FleetMonitor: React.FC<FleetMonitorProps> = ({
             </div>
           </div>
 
-          {/* Right Column: Interactive Vector GIS Map */}
-          <div className="lg:col-span-8 bg-white rounded-xl border border-slate-200 shadow-xs flex flex-col h-[560px] overflow-hidden relative">
-            {/* Map Top Overlay Controls */}
-            <div className="absolute top-3 left-3 z-10 bg-white/95 backdrop-blur-xs border border-slate-200 px-3 py-1.5 rounded-lg shadow-xs flex items-center space-x-3 text-xs">
-              <div className="flex items-center space-x-1.5">
-                <Radio className="w-3.5 h-3.5 text-emerald-600 animate-pulse" />
-                <span className="font-semibold text-slate-800">GIS Satelital Corredor NAFTA / Bajío</span>
-              </div>
-              <div className="flex items-center space-x-2 text-[10px] text-slate-500 font-mono border-l border-slate-200 pl-2">
-                <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-emerald-500"></span> Normal</span>
-                <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-amber-500"></span> Tráfico</span>
-                <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-rose-500"></span> Incidencia</span>
-              </div>
-            </div>
-
-            <div className="absolute top-3 right-3 z-10 bg-white/95 backdrop-blur-xs border border-slate-200 px-2 py-1 rounded-lg shadow-xs text-[11px] text-slate-600 font-mono">
-              {selectedVehicle ? `Enfoque: ${selectedVehicle.plate}` : 'Vista General'}
-            </div>
-
-            {/* Interactive SVG GIS Map Canvas */}
-            <div className="flex-1 bg-slate-950 relative overflow-hidden flex items-center justify-center">
-              <svg
-                viewBox="0 0 760 440"
-                className="w-full h-full object-cover select-none"
-                style={{ background: '#090d16' }}
-              >
-                <defs>
-                  <pattern id="grid" width="30" height="30" patternUnits="userSpaceOnUse">
-                    <path d="M 30 0 L 0 0 0 30" fill="none" stroke="rgba(255,255,255,0.04)" strokeWidth="1" />
-                  </pattern>
-                </defs>
-
-                <rect width="100%" height="100%" fill="url(#grid)" />
-
-                {/* Country Boundary Silhouette */}
-                <path
-                  d="M 60 140 Q 140 100 280 90 T 520 60 T 680 90 L 720 220 Q 640 310 520 360 T 320 380 Q 180 340 100 260 Z"
-                  fill="none"
-                  stroke="rgba(99, 102, 241, 0.15)"
-                  strokeWidth="1.5"
-                  strokeDasharray="4,4"
-                />
-
-                {/* Corridors */}
-                <path
-                  d="M 460 280 L 440 210 L 430 140 L 420 90"
-                  fill="none"
-                  stroke={mapLayer === 'traffic' ? '#f59e0b' : '#334155'}
-                  strokeWidth="3"
-                  strokeDasharray="6,3"
-                  opacity="0.7"
-                />
-                <path
-                  d="M 460 280 L 340 245 L 260 290"
-                  fill="none"
-                  stroke="#6366f1"
-                  strokeWidth="3"
-                  opacity="0.8"
-                />
-                <path
-                  d="M 460 280 L 580 295"
-                  fill="none"
-                  stroke="#64748b"
-                  strokeWidth="2.5"
-                  opacity="0.7"
-                />
-                <path
-                  d="M 420 90 L 450 40"
-                  fill="none"
-                  stroke="#10b981"
-                  strokeWidth="3"
-                  opacity="0.8"
-                />
-
-                {/* Hub Base Nodes */}
-                {hubLocations.map((hub) => {
-                  const pt = projectToMap(hub.lat, hub.lng);
-                  return (
-                    <g key={hub.id} transform={`translate(${pt.x}, ${pt.y})`} className="cursor-pointer">
-                      <circle r="14" fill={hub.color} fillOpacity="0.2" className="animate-ping" />
-                      <circle r="7" fill={hub.color} stroke="#ffffff" strokeWidth="2" />
-                      <text
-                        y="-12"
-                        textAnchor="middle"
-                        fill="#e2e8f0"
-                        fontSize="10"
-                        fontWeight="bold"
-                        className="select-none font-sans drop-shadow-md"
-                      >
-                        {hub.name}
-                      </text>
-                    </g>
-                  );
-                })}
-
-                {/* Dynamic Vehicle Tracks */}
-                {vehicles.map((v) => {
-                  const pos = projectToMap(v.currentLocation.lat, v.currentLocation.lng);
-                  const isSelected = v.id === selectedVehicle.id;
-                  const isAlert = v.status === 'alert';
-
-                  return (
-                    <g
-                      key={v.id}
-                      transform={`translate(${pos.x}, ${pos.y})`}
-                      onClick={() => onSelectVehicle(v)}
-                      className="cursor-pointer group"
-                    >
-                      <circle
-                        r={isSelected ? 18 : 12}
-                        fill={isAlert ? '#f43f5e' : isSelected ? '#6366f1' : '#10b981'}
-                        fillOpacity={isSelected ? 0.35 : 0.2}
-                        className={isAlert ? 'animate-ping' : ''}
-                      />
-
-                      <rect
-                        x="-9"
-                        y="-9"
-                        width="18"
-                        height="18"
-                        rx="4"
-                        fill={isAlert ? '#e11d48' : isSelected ? '#4f46e5' : '#0f172a'}
-                        stroke="#ffffff"
-                        strokeWidth={isSelected ? '2.5' : '1.5'}
-                        transform={`rotate(${v.headingDeg})`}
-                      />
-
-                      <polygon
-                        points="0,-12 4,-7 -4,-7"
-                        fill={isAlert ? '#e11d48' : '#818cf8'}
-                        transform={`rotate(${v.headingDeg})`}
-                      />
-
-                      <g transform="translate(14, -6)">
-                        <rect
-                          x="0"
-                          y="-10"
-                          width="76"
-                          height="20"
-                          rx="4"
-                          fill="#0f172a"
-                          fillOpacity="0.9"
-                          stroke={isSelected ? '#6366f1' : '#334155'}
-                          strokeWidth="1"
-                        />
-                        <text x="6" y="4" fill="#ffffff" fontSize="9" fontWeight="bold" className="font-mono">
-                          {v.plate}
-                        </text>
-                        <text x="50" y="4" fill="#818cf8" fontSize="8" fontWeight="semibold" className="font-mono">
-                          {v.telemetry.speedKmh}k
-                        </text>
-                      </g>
-                    </g>
-                  );
-                })}
-              </svg>
-
-              {/* In-Map Quick Telemetry Overlay for Currently Selected Vehicle */}
-              {selectedVehicle && (
-                <div className="absolute bottom-3 left-3 right-3 bg-slate-900/90 backdrop-blur-md border border-slate-700/80 p-3 rounded-lg text-white shadow-xl flex flex-wrap items-center justify-between gap-3">
-                  <div className="flex items-center space-x-3">
-                    <div className="w-9 h-9 rounded-lg bg-indigo-600/30 border border-indigo-500/50 flex items-center justify-center text-indigo-400">
-                      <Truck className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <div className="flex items-center space-x-2">
-                        <span className="font-bold text-sm font-mono text-white">{selectedVehicle.plate}</span>
-                        <span className="text-xs text-slate-300 font-medium">{selectedVehicle.model}</span>
-                        {getStatusBadge(selectedVehicle.status)}
-                      </div>
-                      <p className="text-xs text-slate-400 mt-0.5">
-                        📍 {selectedVehicle.currentLocation.address}, {selectedVehicle.currentLocation.city} • <span className="text-slate-300">Conductor: {selectedVehicle.driver.name}</span>
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center space-x-4 text-xs font-mono">
-                    <div className="text-right">
-                      <span className="text-slate-400 block text-[10px]">VELOCIDAD</span>
-                      <span className="text-emerald-400 font-bold text-sm">{selectedVehicle.telemetry.speedKmh} km/h</span>
-                    </div>
-                    {selectedVehicle.telemetry.cargoTempC !== undefined && (
-                      <div className="text-right border-l border-slate-700 pl-3">
-                        <span className="text-slate-400 block text-[10px]">TEMP CARGA</span>
-                        <span className="text-sky-300 font-bold text-sm">{selectedVehicle.telemetry.cargoTempC}°C</span>
-                      </div>
-                    )}
-                    <div className="text-right border-l border-slate-700 pl-3">
-                      <span className="text-slate-400 block text-[10px]">COMBUSTIBLE/BATT</span>
-                      <span className="text-amber-400 font-bold text-sm">{selectedVehicle.telemetry.fuelLevelPercent}%</span>
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
+          {/* Right Column: High-Tech Interactive GIS Map Layer with Real Satellites & Live Animations */}
+          <div className="lg:col-span-8">
+            <InteractiveGISMap
+              vehicles={filteredVehicles}
+              selectedVehicle={selectedVehicle}
+              onSelectVehicle={onSelectVehicle}
+              mapLayerMode={mapLayer}
+            />
           </div>
         </div>
       )}

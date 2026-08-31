@@ -9,14 +9,10 @@ import {
   Radio,
   ArrowRight,
   ChevronRight,
-  Globe2,
   Lock,
-  Zap,
   Activity,
   Compass,
-  CheckCircle2,
-  Cpu,
-  UserCheck
+  CheckCircle2
 } from 'lucide-react';
 import { motion } from 'motion/react';
 import { SupplyChainKPIs } from '../types/logistics';
@@ -31,7 +27,6 @@ interface WelcomeScreenProps {
 
 export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ kpis, onEnterConsole, onOpenAuth }) => {
   const { t, language } = useLanguage();
-  const [selectedRole, setSelectedRole] = useState<string>('director');
   const [currentTime, setCurrentTime] = useState<string>('');
 
   useEffect(() => {
@@ -90,27 +85,6 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ kpis, onEnterConso
     }
   ];
 
-  const roles = [
-    {
-      id: 'director',
-      title: t.welcome.roleDirectorTitle,
-      clearance: t.welcome.roleDirectorClearance,
-      description: t.welcome.roleDirectorDesc
-    },
-    {
-      id: 'dispatch',
-      title: t.welcome.roleDispatchTitle,
-      clearance: t.welcome.roleDispatchClearance,
-      description: t.welcome.roleDispatchDesc
-    },
-    {
-      id: 'security',
-      title: t.welcome.roleSecurityTitle,
-      clearance: t.welcome.roleSecurityClearance,
-      description: t.welcome.roleSecurityDesc
-    }
-  ];
-
   return (
     <div className="min-h-screen bg-white text-slate-900 flex flex-col justify-between selection:bg-slate-900 selection:text-white relative overflow-hidden bg-grid-minimal">
       {/* Top Institutional Header */}
@@ -118,16 +92,27 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ kpis, onEnterConso
         <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
           {/* Sovereign Brand Emblem */}
           <div className="flex items-center space-x-3.5">
-            <div className="w-10 h-10 bg-slate-950 text-white rounded-lg flex items-center justify-center font-seal text-base font-bold shadow-xs border border-slate-800">
-              DB
+            <div className="relative flex items-center justify-center">
+              {/* Expansive soft backlighting glow */}
+              <div className="absolute -inset-3 rounded-2xl bg-indigo-500/20 blur-lg animate-logo-aura pointer-events-none" />
+              <div className="absolute -inset-1.5 rounded-xl bg-slate-900/10 blur-sm pointer-events-none" />
+              
+              {/* Matching color orbital ribbon loops */}
+              <div className="absolute -inset-[3px] rounded-xl overflow-hidden pointer-events-none">
+                <div className="w-[200%] h-[200%] absolute -top-1/2 -left-1/2 animate-logo-spin bg-[conic-gradient(from_0deg,transparent_0_240deg,#1e1b4b_300deg,#4338ca_340deg,#020617_360deg)] opacity-70" />
+              </div>
+
+              {/* Core DB Emblem */}
+              <div className="relative w-10 h-10 bg-slate-950 text-white rounded-lg flex items-center justify-center font-seal text-base font-bold shadow-md border border-slate-800/80 z-10">
+                <span className="relative z-10">DB</span>
+                {/* Subtle internal reflex */}
+                <div className="absolute inset-0 rounded-lg bg-gradient-to-tr from-transparent via-white/5 to-white/15 pointer-events-none" />
+              </div>
             </div>
             <div>
               <div className="flex items-center space-x-2">
                 <span className="font-seal tracking-widest text-xs font-bold text-slate-900 uppercase">
                   Draybyte Logistics Group
-                </span>
-                <span className="text-[10px] font-mono-tech uppercase bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded border border-slate-200">
-                  {t.welcome.brandTag}
                 </span>
               </div>
               <p className="text-[11px] text-slate-500 font-sans tracking-tight">
@@ -330,57 +315,6 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ kpis, onEnterConso
                     <span>{t.welcome.startModule}</span>
                     <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
                   </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Section: Operator Clearance / Role Selector */}
-        <div className="max-w-5xl mx-auto w-full mt-10 p-5 rounded-2xl bg-slate-50/80 border border-slate-200/80">
-          <div className="flex flex-wrap items-center justify-between mb-3 gap-2">
-            <div className="flex items-center space-x-2">
-              <UserCheck className="w-4 h-4 text-slate-700" />
-              <span className="text-xs font-mono-tech font-bold uppercase tracking-wider text-slate-800">
-                {t.welcome.rolesTitle}
-              </span>
-            </div>
-            <span className="text-[11px] font-mono-tech text-slate-500">
-              {t.welcome.rolesEncrypted}
-            </span>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-            {roles.map((role) => {
-              const isSelected = selectedRole === role.id;
-              return (
-                <div
-                  key={role.id}
-                  onClick={() => setSelectedRole(role.id)}
-                  className={`p-3.5 rounded-xl border transition-all cursor-pointer ${
-                    isSelected
-                      ? 'bg-white border-slate-950 shadow-xs ring-1 ring-slate-950'
-                      : 'bg-white/60 border-slate-200 hover:bg-white hover:border-slate-300'
-                  }`}
-                >
-                  <div className="flex items-center justify-between mb-1">
-                    <span className="font-sans font-bold text-xs text-slate-900">
-                      {role.title}
-                    </span>
-                    <div
-                      className={`w-3.5 h-3.5 rounded-full border flex items-center justify-center ${
-                        isSelected ? 'border-slate-950 bg-slate-950' : 'border-slate-300'
-                      }`}
-                    >
-                      {isSelected && <div className="w-1.5 h-1.5 rounded-full bg-white" />}
-                    </div>
-                  </div>
-                  <span className="text-[10px] font-mono-tech text-indigo-700 font-semibold block mb-1">
-                    {role.clearance}
-                  </span>
-                  <p className="text-[11px] text-slate-500 font-sans leading-tight">
-                    {role.description}
-                  </p>
                 </div>
               );
             })}

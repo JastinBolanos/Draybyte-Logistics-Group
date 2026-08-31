@@ -1,6 +1,6 @@
 export const APP_CONFIG = {
-  APP_NAME: 'Draybyte Logistics Group',
-  PLATFORM_TITLE: 'Logistics Control Tower | Draybyte Logistics Group Platform',
+  APP_NAME: 'Draybyte Logistics',
+  PLATFORM_TITLE: 'Draybyte Logistics Platform',
   BRAND_SHORT: 'DB',
   VERSION: 'v2.4.0',
   COPYRIGHT: '© 2026 DRAYBYTE LOGISTICS GROUP PLATFORM v2.4.0',

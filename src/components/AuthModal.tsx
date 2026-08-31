@@ -568,7 +568,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                       <div><strong>{t.auth.successEmailSent}</strong> <span className="text-indigo-600 font-bold">{registeredData.email}</span></div>
                       <div className="flex items-center gap-1 text-slate-500 pt-1">
                         <Clock className="w-3.5 h-3.5 text-amber-600" />
-                        <span>{language === 'es' ? 'Tiempo estimado de validación: 2 a 4 hrs hábiles' : 'Estimated review time: 2 to 4 business hours'}</span>
+                        <span>{language === 'es' ? 'Tiempo estimado de validación: entre 24 a 48 hrs hábiles' : 'Estimated review time: 24 to 48 business hours'}</span>
                       </div>
                     </div>
                   )}
