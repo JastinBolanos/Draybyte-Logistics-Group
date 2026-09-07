@@ -94,12 +94,12 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ kpis, onEnterConso
           <div className="flex items-center space-x-3.5">
             <div className="relative flex items-center justify-center">
               {/* Expansive soft backlighting glow */}
-              <div className="absolute -inset-3 rounded-2xl bg-indigo-500/20 blur-lg animate-logo-aura pointer-events-none" />
-              <div className="absolute -inset-1.5 rounded-xl bg-slate-900/10 blur-sm pointer-events-none" />
+              <div className="absolute -inset-3 rounded-2xl bg-slate-400/20 blur-lg animate-logo-aura pointer-events-none" />
+              <div className="absolute -inset-1.5 rounded-xl bg-slate-950/10 blur-sm pointer-events-none" />
               
-              {/* Matching color orbital ribbon loops */}
+              {/* Silver-metallic orbital ribbon loops */}
               <div className="absolute -inset-[3px] rounded-xl overflow-hidden pointer-events-none">
-                <div className="w-[200%] h-[200%] absolute -top-1/2 -left-1/2 animate-logo-spin bg-[conic-gradient(from_0deg,transparent_0_240deg,#1e1b4b_300deg,#4338ca_340deg,#020617_360deg)] opacity-70" />
+                <div className="w-[200%] h-[200%] absolute -top-1/2 -left-1/2 animate-logo-spin bg-[conic-gradient(from_0deg,transparent_0_220deg,#64748b_280deg,#e2e8f0_320deg,#94a3b8_340deg,#0f172a_360deg)] opacity-80" />
               </div>
 
               {/* Core DB Emblem */}

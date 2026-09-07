@@ -26,6 +26,15 @@
   font-family: 'JetBrains Mono', monospace;
 }
 
+/* Hide scrollbar for clean horizontal swipe on mobile */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 /* Subtle architectural grid background */
 .bg-grid-minimal {
   background-size: 40px 40px;

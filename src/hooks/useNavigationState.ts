@@ -26,6 +26,21 @@ export function useNavigationState() {
     });
   }, []);
 
+  // Mobile sidebar drawer state
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
+
+  const handleOpenMobileMenu = useCallback(() => {
+    setIsMobileMenuOpen(true);
+  }, []);
+
+  const handleCloseMobileMenu = useCallback(() => {
+    setIsMobileMenuOpen(false);
+  }, []);
+
+  const toggleMobileMenu = useCallback(() => {
+    setIsMobileMenuOpen((prev) => !prev);
+  }, []);
+
   // Modals state
   const [isNewShipmentOpen, setIsNewShipmentOpen] = useState<boolean>(false);
   const [isScanModalOpen, setIsScanModalOpen] = useState<boolean>(false);
@@ -69,6 +84,11 @@ export function useNavigationState() {
     isSidebarExpanded,
     setIsSidebarExpanded,
     toggleSidebar,
+    isMobileMenuOpen,
+    setIsMobileMenuOpen,
+    handleOpenMobileMenu,
+    handleCloseMobileMenu,
+    toggleMobileMenu,
     isNewShipmentOpen,
     handleOpenNewShipment,
     handleCloseNewShipment,

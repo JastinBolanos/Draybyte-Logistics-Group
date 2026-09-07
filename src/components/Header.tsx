@@ -44,6 +44,7 @@ interface HeaderProps {
   onSignOut?: () => void;
   isSidebarExpanded?: boolean;
   onToggleSidebar?: () => void;
+  onOpenMobileMenu?: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -65,7 +66,8 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenAuth,
   onSignOut,
   isSidebarExpanded = false,
-  onToggleSidebar
+  onToggleSidebar,
+  onOpenMobileMenu
 }) => {
   const { t } = useLanguage();
 
@@ -140,10 +142,22 @@ export const Header: React.FC<HeaderProps> = ({
       </div>
 
       {/* Main Command Header Bar */}
-      <div className="h-16 px-4 sm:px-6 md:px-8 flex items-center justify-between gap-3 sm:gap-4 bg-white">
-        <div className="flex items-center gap-3 sm:gap-4 overflow-hidden">
+      <div className="h-16 px-3 sm:px-6 md:px-8 flex items-center justify-between gap-2.5 sm:gap-4 bg-white border-b border-slate-100">
+        <div className="flex items-center gap-2.5 sm:gap-4 shrink-0">
+          {/* Botón de tres líneas (hamburguesa) solo visible en celular */}
+          <button
+            onClick={onOpenMobileMenu}
+            id="btn-mobile-hamburger-menu"
+            title="Abrir menú"
+            className="md:hidden p-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-200/80 transition-all cursor-pointer shrink-0 flex items-center justify-center shadow-xs active:scale-95"
+            aria-label="Abrir menú de navegación"
+          >
+            <Menu className="w-5 h-5 text-slate-800" />
+          </button>
+
+          {/* Brand & Logo (visible en pantallas grandes; en móvil el espacio se aprovecha para la bandeja deslizable) */}
           <div
-            className={`flex items-center space-x-3 transition-all duration-300 ease-in-out overflow-hidden ${
+            className={`hidden md:flex items-center space-x-3 transition-all duration-300 ease-in-out overflow-hidden ${
               isSidebarExpanded
                 ? 'opacity-0 max-w-0 -translate-x-6 pointer-events-none invisible'
                 : 'opacity-100 max-w-[500px] translate-x-0 visible'
@@ -156,19 +170,21 @@ export const Header: React.FC<HeaderProps> = ({
             >
               <div className="relative flex items-center justify-center shrink-0">
                 {/* Expansive soft backlighting glow */}
-                <div className="absolute -inset-2 rounded-xl bg-indigo-500/20 blur-md animate-logo-aura pointer-events-none" />
+                <div className="absolute -inset-2 rounded-xl bg-slate-400/20 blur-md animate-logo-aura pointer-events-none" />
+                <div className="absolute -inset-1 rounded-lg bg-slate-950/10 blur-xs pointer-events-none" />
                 
-                {/* Matching color orbital ribbon loops */}
+                {/* Silver-metallic orbital ribbon loops */}
                 <div className="absolute -inset-[1.5px] rounded-lg overflow-hidden pointer-events-none">
-                  <div className="w-[200%] h-[200%] absolute -top-1/2 -left-1/2 animate-logo-spin bg-[conic-gradient(from_0deg,transparent_0_240deg,#4338ca_300deg,#6366f1_340deg,#312e81_360deg)] opacity-80" />
+                  <div className="w-[200%] h-[200%] absolute -top-1/2 -left-1/2 animate-logo-spin bg-[conic-gradient(from_0deg,transparent_0_220deg,#64748b_280deg,#e2e8f0_320deg,#94a3b8_340deg,#0f172a_360deg)] opacity-80" />
                 </div>
 
-                <span className="relative z-10 font-seal text-xs bg-indigo-600 group-hover:bg-indigo-700 text-white w-7 h-7 rounded-lg flex items-center justify-center font-bold shadow-xs transition-colors">
-                  DB
+                <span className="relative z-10 font-seal text-xs bg-slate-950 group-hover:bg-slate-900 text-white w-7 h-7 rounded-lg flex items-center justify-center font-bold shadow-xs border border-slate-800/90 transition-colors">
+                  <span className="relative z-10">DB</span>
+                  <div className="absolute inset-0 rounded-lg bg-gradient-to-tr from-transparent via-white/5 to-white/20 pointer-events-none" />
                 </span>
               </div>
               <div className="whitespace-nowrap">
-                <h1 className="text-sm sm:text-base font-bold text-slate-900 tracking-tight group-hover:text-indigo-600 transition-colors">
+                <h1 className="text-sm sm:text-base font-bold text-slate-900 tracking-tight group-hover:text-slate-700 transition-colors">
                   {t.header.brandTitle}
                 </h1>
                 <p className="text-[10px] text-slate-500 font-mono-tech">
@@ -185,20 +201,26 @@ export const Header: React.FC<HeaderProps> = ({
         </div>
 
         {/* Global Search, Language Toggle, Actions & User Profile */}
-        <div className="flex items-center gap-2.5">
+        {/* Deslizable de costado solo en celular, estático en pantallas grandes */}
+        <div
+          id="header-actions-tray"
+          className="flex-1 min-w-0 flex items-center gap-2 sm:gap-2.5 overflow-x-auto no-scrollbar scroll-smooth overscroll-x-contain touch-pan-x py-1 pl-1 md:overflow-visible md:justify-end"
+        >
           {onOpenWelcome && (
             <button
               onClick={onOpenWelcome}
-              className="hidden lg:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-medium transition-colors cursor-pointer"
+              className="hidden lg:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-medium transition-colors cursor-pointer shrink-0"
             >
               <span>{t.header.mainPortal}</span>
             </button>
           )}
 
           {/* Prominent Language Switcher in Header */}
-          <LanguageToggle variant="header" />
+          <div className="shrink-0">
+            <LanguageToggle variant="header" />
+          </div>
 
-          <div className="relative w-44 sm:w-56 md:w-64">
+          <div className="relative w-36 sm:w-52 md:w-64 shrink-0">
             <input
               type="text"
               placeholder={t.header.searchPlaceholder}
@@ -219,7 +241,7 @@ export const Header: React.FC<HeaderProps> = ({
 
           <button
             onClick={() => setIsDense(!isDense)}
-            className={`hidden sm:inline-flex px-2.5 py-1.5 rounded-lg border text-xs font-medium transition-colors cursor-pointer ${
+            className={`hidden sm:inline-flex px-2.5 py-1.5 rounded-lg border text-xs font-medium transition-colors cursor-pointer shrink-0 ${
               isDense ? 'bg-slate-800 text-white border-slate-900' : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
             }`}
             title={isDense ? t.standard : t.compact}
@@ -229,38 +251,44 @@ export const Header: React.FC<HeaderProps> = ({
 
           <button
             onClick={onScanBarcode}
-            className="flex items-center space-x-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200/80 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors cursor-pointer"
+            id="btn-header-scan"
+            title={t.header.scanButton}
+            aria-label={t.header.scanButton}
+            className="flex items-center justify-center space-x-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200/80 p-2 sm:px-3 sm:py-1.5 rounded-lg text-xs font-medium transition-colors cursor-pointer shrink-0 active:scale-95"
           >
-            <QrCode className="w-3.5 h-3.5 text-slate-600" />
-            <span className="hidden md:inline">{t.header.scanButton}</span>
+            <QrCode className="w-4 h-4 sm:w-3.5 sm:h-3.5 text-slate-600 shrink-0" />
+            <span className="hidden md:inline whitespace-nowrap">{t.header.scanButton}</span>
           </button>
 
           <button
             onClick={onNewShipment}
-            className="flex items-center space-x-1.5 bg-indigo-600 hover:bg-indigo-700 text-white px-3.5 py-1.5 rounded-lg text-xs font-semibold shadow-xs transition-colors cursor-pointer"
+            id="btn-header-new-shipment"
+            title={t.header.newShipmentButton}
+            aria-label={t.header.newShipmentButton}
+            className="flex items-center justify-center space-x-1.5 bg-indigo-600 hover:bg-indigo-700 text-white p-2 sm:px-3.5 sm:py-1.5 rounded-lg text-xs font-semibold shadow-xs transition-colors cursor-pointer shrink-0 active:scale-95"
           >
-            <Plus className="w-3.5 h-3.5" />
-            <span>{t.header.newShipmentButton}</span>
+            <Plus className="w-4 h-4 sm:w-3.5 sm:h-3.5 shrink-0" />
+            <span className="hidden sm:inline whitespace-nowrap">{t.header.newShipmentButton}</span>
           </button>
 
           {/* User Profile / Demo Mode Status */}
           {userSession?.isDemo ? (
-            <div className="flex items-center space-x-2 pl-1">
+            <div className="flex items-center space-x-2 pl-1 shrink-0">
               <button
                 onClick={() => onOpenAuth?.('login')}
                 id="btn-header-login"
-                className="px-3 py-1.5 bg-slate-950 hover:bg-slate-800 text-white rounded-lg text-xs font-semibold shadow-xs transition-colors cursor-pointer flex items-center gap-1.5"
+                className="px-3 py-1.5 bg-slate-950 hover:bg-slate-800 text-white rounded-lg text-xs font-semibold shadow-xs transition-colors cursor-pointer flex items-center gap-1.5 shrink-0 whitespace-nowrap"
               >
                 <span>{t.auth.btnLogin}</span>
               </button>
             </div>
           ) : (
-            <div className="flex items-center space-x-2 pl-1">
+            <div className="flex items-center space-x-2 pl-1 shrink-0">
               <div className="hidden lg:flex flex-col text-right">
-                <span className="text-[11px] font-bold text-slate-800 leading-none">
+                <span className="text-[11px] font-bold text-slate-800 leading-none whitespace-nowrap">
                   {userSession?.name || 'Director General'}
                 </span>
-                <span className="text-[9px] font-mono-tech text-indigo-700 font-semibold uppercase">
+                <span className="text-[9px] font-mono-tech text-indigo-700 font-semibold uppercase whitespace-nowrap">
                   {userSession?.role === 'director' ? 'Nivel 5 • C-Level' : 'Nivel 4 • Operativo'}
                 </span>
               </div>

@@ -104,25 +104,23 @@ export const LanguageToggle: React.FC<LanguageToggleProps> = ({ variant = 'heade
         <button
           onClick={() => setLanguage('es')}
           title="Cambiar a Español"
-          className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
+          className={`flex items-center px-3 py-1.5 rounded-lg text-xs font-bold tracking-wide transition-all cursor-pointer ${
             language === 'es'
               ? 'bg-white text-slate-950 shadow-xs border border-slate-200'
               : 'text-slate-500 hover:text-slate-800'
           }`}
         >
-          <span className="text-sm">🇲🇽</span>
           <span>ES</span>
         </button>
         <button
           onClick={() => setLanguage('en')}
           title="Switch to English"
-          className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
+          className={`flex items-center px-3 py-1.5 rounded-lg text-xs font-bold tracking-wide transition-all cursor-pointer ${
             language === 'en'
               ? 'bg-white text-slate-950 shadow-xs border border-slate-200'
               : 'text-slate-500 hover:text-slate-800'
           }`}
         >
-          <span className="text-sm">🇺🇸</span>
           <span>EN</span>
         </button>
       </div>
@@ -138,7 +136,7 @@ export const LanguageToggle: React.FC<LanguageToggleProps> = ({ variant = 'heade
       >
         <Globe className="w-3.5 h-3.5 text-indigo-600" />
         <span className="font-mono text-[11px] font-bold uppercase">
-          {language === 'es' ? '🇲🇽 ES' : '🇺🇸 EN'}
+          {language === 'es' ? 'ES' : 'EN'}
         </span>
       </button>
     );
@@ -158,9 +156,6 @@ export const LanguageToggle: React.FC<LanguageToggleProps> = ({ variant = 'heade
         <span className="text-slate-300">/</span>
         <span className={language === 'en' ? 'text-indigo-600' : 'text-slate-400'}>EN</span>
       </div>
-      <span className="text-xs">
-        {language === 'es' ? '🇲🇽' : '🇺🇸'}
-      </span>
     </button>
   );
 };

@@ -71,6 +71,9 @@ export default function App() {
     setSearchQuery,
     isSidebarExpanded,
     toggleSidebar,
+    isMobileMenuOpen,
+    handleOpenMobileMenu,
+    handleCloseMobileMenu,
     isNewShipmentOpen,
     handleOpenNewShipment,
     handleCloseNewShipment,
@@ -116,15 +119,29 @@ export default function App() {
   // Main Command & Control Platform Layout
   return (
     <div className="flex h-screen bg-slate-50 font-sans text-slate-800 overflow-hidden selection:bg-indigo-600 selection:text-white">
-      {/* Interface Left Sidebar Rail */}
+      {/* Interface Left Sidebar Rail (Desktop) & Mobile Drawer */}
       <SidebarRail
         activeTab={activeTab}
-        onSelectTab={setActiveTab}
-        onOpenWelcome={handleOpenWelcome}
+        onSelectTab={(tab) => {
+          setActiveTab(tab);
+          handleCloseMobileMenu();
+        }}
+        onOpenWelcome={() => {
+          handleOpenWelcome();
+          handleCloseMobileMenu();
+        }}
         isExpanded={isSidebarExpanded}
         onToggleExpanded={toggleSidebar}
-        onNewShipment={handleOpenNewShipment}
-        onScanBarcode={handleOpenScanModal}
+        isMobileOpen={isMobileMenuOpen}
+        onCloseMobile={handleCloseMobileMenu}
+        onNewShipment={() => {
+          handleCloseMobileMenu();
+          handleOpenNewShipment();
+        }}
+        onScanBarcode={() => {
+          handleCloseMobileMenu();
+          handleOpenScanModal();
+        }}
         kpis={kpis}
       />
 
@@ -154,6 +171,7 @@ export default function App() {
           }}
           isSidebarExpanded={isSidebarExpanded}
           onToggleSidebar={toggleSidebar}
+          onOpenMobileMenu={handleOpenMobileMenu}
         />
 
         {/* Dynamic Domain Views */}

@@ -121,8 +121,9 @@ export const AuthModal: React.FC<AuthModalProps> = ({
         {/* Modal Top Header Bar */}
         <div className="bg-slate-950 text-white px-6 py-4 flex items-center justify-between border-b border-slate-800">
           <div className="flex items-center space-x-3">
-            <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center font-bold text-xs tracking-wider border border-indigo-400/40">
-              DB
+            <div className="relative w-8 h-8 bg-slate-950 rounded-lg flex items-center justify-center font-seal font-bold text-xs tracking-wider border border-slate-700/80 text-white shadow-xs">
+              <span className="relative z-10">DB</span>
+              <div className="absolute inset-0 rounded-lg bg-gradient-to-tr from-transparent via-white/5 to-white/20 pointer-events-none" />
             </div>
             <div>
               <div className="flex items-center space-x-2">
