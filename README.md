@@ -10,7 +10,7 @@
 
 🌍 **[Ver Plataforma en Vivo (Producción) 🟢]** *https://draybyte.vercel.app/*
 
-![Vista Previa de Draybyte Control Tower](https://github.com/user-attachments/assets/f8400eb7-b3a5-455f-b29c-2d01105769a2)
+![Vista Previa de Draybyte Control Tower](https://github.com/user-attachments/assets/ea0256cf-1eb0-4aed-9dad-ae3a62f7cea4)
 
 ---
 
@@ -19,7 +19,7 @@
 **🎬 Panel de Control y Telemetría Logística**  
 Exploración de la interfaz de la torre de control: monitoreo de flotas satelitales, orquestación de envíos y orquestación de respuesta a incidentes en una cadena de suministro de alto rendimiento.
 
-https://github.com/user-attachments/assets/7fd97020-1ca1-492f-b236-0ef814e0f6c0
+https://github.com/user-attachments/assets/1d45d08c-6670-4b60-a5c8-10875b2854ee
 
 ---
 
