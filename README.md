@@ -8,7 +8,18 @@
 > **Centro de Operaciones y Control de Cadena de Suministro.** 
 > Plataforma empresarial desplegada para la orquestación logística de *Draybyte Logistics Group*. Este sistema centraliza la telemetría satelital de flotas en tiempo real, trazabilidad de envíos, gestión de inventarios multi-hub y optimización de despachos para corredores de carga pesada y cross-border (LATAM / US-MX).
 
-🌍 **[Ver Plataforma en Vivo (Producción) 🟢]** *(Aquí puedes poner un enlace a Vercel, Netlify o GitHub Pages si la tienes hosteada)*
+🌍 **[Ver Plataforma en Vivo (Producción) 🟢]** *(Enlace a tu despliegue)*
+
+![Vista Previa de Draybyte Control Tower](https://github.com/user-attachments/assets/f8400eb7-b3a5-455f-b29c-2d01105769a2)
+
+---
+
+## 🎥 Demostración de Operaciones en Tiempo Real
+
+**🎬 Panel de Control y Telemetría Logística**  
+Exploración de la interfaz de la torre de control: monitoreo de flotas satelitales, orquestación de envíos y orquestación de respuesta a incidentes en una cadena de suministro de alto rendimiento.
+
+https://github.com/user-attachments/assets/7fd97020-1ca1-492f-b236-0ef814e0f6c0
 
 ---
 
