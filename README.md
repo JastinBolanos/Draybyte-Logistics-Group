@@ -5,95 +5,98 @@
 ![Version](https://img.shields.io/badge/version-2.4.0--ENT-orange)
 ![Security](https://img.shields.io/badge/security-TLS_1.3-success)
 
-> **Centro de Operaciones y Control de Cadena de Suministro.** 
-> Plataforma empresarial desplegada para la orquestación logística de *Draybyte Logistics Group*. Este sistema centraliza la telemetría satelital de flotas en tiempo real, trazabilidad de envíos, gestión de inventarios multi-hub y optimización de despachos para corredores de carga pesada y cross-border (LATAM / US-MX).
+> **Supply Chain Control and Operations Center.** 
+> Enterprise platform deployed for the logistics orchestration of *Draybyte Logistics Group*. This system centralizes real-time satellite fleet telemetry, shipment traceability, multi-hub inventory management, and dispatch optimization for heavy freight and cross-border corridors (LATAM / US-MX).
 
-🌍 **[Ver Plataforma en Vivo (Producción) 🟢]** *https://draybyte.vercel.app/*
+🌍 **[View Live Platform (Production) 🟢]** *https://draybyte.vercel.app/*
 
-![Vista Previa de Draybyte Control Tower](https://github.com/user-attachments/assets/ea0256cf-1eb0-4aed-9dad-ae3a62f7cea4)
+![Draybyte Control Tower Preview](https://github.com/user-attachments/assets/ea0256cf-1eb0-4aed-9dad-ae3a62f7cea4)
 
 ---
 
-## 🎥 Demostración de Operaciones en Tiempo Real
+## 🎥 Real-Time Operations Demo
 
-**🎬 Panel de Control y Telemetría Logística**  
-Exploración de la interfaz de la torre de control: monitoreo de flotas satelitales, orquestación de envíos y orquestación de respuesta a incidentes en una cadena de suministro de alto rendimiento.
+**🎬 Control Panel & Logistics Telemetry**  
+Control tower interface walkthrough: satellite fleet monitoring, shipment orchestration, and incident response handling in a high-performance supply chain.
 
 https://github.com/user-attachments/assets/1d45d08c-6670-4b60-a5c8-10875b2854ee
 
 ---
 
-## 🏗️ Arquitectura de Sistema y Stack Tecnológico
+## 🏗️ System Architecture & Tech Stack
 
-Este repositorio contiene la arquitectura de la aplicación cliente (Web/Edge), optimizada para alta disponibilidad y renderizado de datos en tiempo real. *(Nota: Por políticas de seguridad corporativa, los repositorios de los microservicios backend, integraciones IoT y bases de datos permanecen privados).*
+This repository contains the client application architecture (Web/Edge), optimized for high availability and real-time data rendering. *(Note: Due to corporate security policies, repositories for backend microservices, IoT integrations, and databases remain private).*
 
 - **Core & Runtime (Edge-Optimized):**
   - `react` (`^19.0.0`) & `react-dom`
-  - `typescript` (`~5.7.2`) para tipado estricto de grado empresarial.
-  - `vite` (`^6.2.0`) para compilación ultrarrápida.
-- **Interfaz de Usuario (UI) & Estilizado:**
-  - `tailwindcss` (`^4.0.9`) con arquitectura atómica.
-  - `lucide-react` para iconografía técnica estandarizada.
-  - `clsx` & `tailwind-merge` para renderizado condicional de componentes.
-- **Visualización de Telemetría & Analítica:**
-  - `recharts` (`^2.15.1`) para dashboards de OTD (On-Time Delivery).
-- **Motor de IA & Optimización:**
-  - Integración nativa con `@google/genai` (`^2.4.0`) para el *Neural Dispatch Core*.
+  - `typescript` (`~5.7.2`) for enterprise-grade strict typing.
+  - `vite` (`^6.2.0`) for ultra-fast compilation.
+- **User Interface (UI) & Styling:**
+  - `tailwindcss` (`^4.0.9`) with atomic architecture.
+  - `lucide-react` for standardized technical iconography.
+  - `clsx` & `tailwind-merge` for conditional component rendering.
+- **Telemetry & Analytics Visualization:**
+  - `recharts` (`^2.15.1`) for OTD (On-Time Delivery) dashboards.
+- **AI Engine & Optimization:**
+  - Native integration with `@google/genai` (`^2.4.0`) for the *Neural Dispatch Core*.
 
 ---
 
-## 🚀 Módulos Operativos (Desplegados)
+## 🚀 Operational Modules (Deployed)
 
-1. **📡 Torre de Control de Flota Satelital (`FleetMonitor`)**
-   - Ingesta de datos telemétricos IoT en tiempo real: velocidad instantánea, nivel de combustible, temperatura de cadena de frío y latencia GPS (0.4ms).
-   - Recálculo dinámico de rutas alternas y ETAs.
+1. **📡 Satellite Fleet Control Tower (`FleetMonitor`)**
+   - Real-time IoT telemetric data ingestion: instant speed, fuel level, cold chain temperature, and GPS latency (0.4ms).
+   - Dynamic re-routing and ETA recalculation.
 
-2. **📦 Orquestación de Envíos y Aduanas (`ShipmentManager`)**
-   - Control estricto de Carta Porte, códigos de contenedor y manifiestos aduanales SAT CFDI 4.0.
-   - Bitácora de eventos inmutable con sellos de tiempo, coordenadas GPS y escáner de código de barras.
+2. **📦 Shipment Orchestration & Customs (`ShipmentManager`)**
+   - Strict tracking of Waybill / Carta Porte, container codes, and SAT CFDI 4.0 customs manifests.
+   - Immutable event logs with timestamps, GPS coordinates, and barcode scanner integration.
 
-3. **🏭 Gestión de Inventarios Multi-Hub (`InventoryManager`)**
-   - Visibilidad global de stock en múltiples centros de distribución (CDMX, GDL, MTY).
-   - Sistema de asignación automatizada y alertas de ruptura de stock.
+3. **🏭 Multi-Hub Inventory Management (`InventoryManager`)**
+   - Global stock visibility across multiple distribution centers (CDMX, GDL, MTY).
+   - Automated allocation system and stockout alerts.
 
-4. **⚠️ Centro de Mando de Incidentes (`IncidentsManager`)**
-   - Monitoreo de bloqueos viales, alertas de seguridad (botón de pánico) y anomalías térmicas en cajas refrigeradas.
-   - Protocolos de resolución asistida y ajuste de KPIs operativos en vivo.
+4. **⚠️ Incident Command Center (`IncidentsManager`)**
+   - Monitoring of road closures, security alerts (panic button), and thermal anomalies in refrigerated cargo.
+   - Assisted resolution protocols and live operational KPI adjustments.
 
 5. **🧠 Neural Dispatch Core (`RouteOptimizerAI`)**
-   - Optimizador de rutas potenciado por Inteligencia Artificial para el balanceo de carga, mitigación de cuellos de botella y maximización del ahorro de combustible.
+   - AI-powered route optimizer for load balancing, bottleneck mitigation, and fuel savings maximization.
 
 ---
 
-## 💻 Guía de Despliegue y Ejecución (Entorno Local)
+## 💻 Deployment & Execution Guide (Local Environment)
 
-Para desarrolladores autorizados o ingenieros de DevOps que requieran auditar o correr el entorno de la interfaz cliente en local:
+For authorized developers or DevOps engineers who need to audit or run the client interface environment locally:
 
-### 1. Clonar el repositorio y preparar entorno
+### 1. Clone the repository and set up environment
 ```bash
-git clone [https://github.com/tu-usuario/draybyte-logistics-platform.git](https://github.com/tu-usuario/draybyte-logistics-platform.git)
+git clone https://github.com/your-username/draybyte-logistics-platform.git
 cd draybyte-logistics-platform
 ```
-### 2. Instalación de dependencias (Node.js v18+)
-```Bash
+
+### 2. Install dependencies (Node.js v18+)
+```bash
 npm install
 ```
 
-### 3. Configuración de Entorno (Environment)
-Clona el archivo de configuración base. Para habilitar el módulo Neural Dispatch Core, se requiere inyectar la API Key correspondiente.
-```Bash
+### 3. Environment Configuration
+Clone the base configuration file. To enable the Neural Dispatch Core module, inject the corresponding API key.
+```bash
 cp .env.example .env
 ```
 
-### 4. Iniciar el servidor local de desarrollo
-```Bash
+### 4. Start the local development server
+```bash
 npm run dev
-La terminal indicará el puerto local habilitado (por defecto http://localhost:3000).
+```
+The terminal will display the enabled local port (default: http://localhost:3000).
+
+### 5. Production Build (CI/CD Pipeline)
+To generate the optimized production build artifacts ready for CDN/Edge deployment:
+```bash
+npm run build
 ```
 
-### 5. Compilación para Producción (CI/CD Pipeline)
-Para generar los artefactos de construcción optimizados listos para despliegue en CDN/Edge:
-```Bash
-npm run build
-Propiedad Intelectual de Draybyte Logistics Group © 2026. Sistema Operativo.
-```
+---
+*Draybyte Logistics Group Intellectual Property © 2026. Operating System.*

@@ -2,5 +2,5 @@
   "name": "Logistics Control Tower",
   "description": "High-density real-time fleet monitoring, shipment telemetry, smart inventory management, and automated supply chain dispatch system.",
   "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+  "majorCapabilities": []
 }
