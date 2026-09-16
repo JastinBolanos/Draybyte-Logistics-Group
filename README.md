@@ -1,18 +1,30 @@
-# 🌐 Draybyte Logistics Group - Central Control Tower (v2.4.0-ENT)
+<div align="center">
+  <img alt="Draybyte Banner" src="https://github.com/user-attachments/assets/7d9317b7-b8a0-4eef-99a3-6fbf3fb7214e" width="50%" />
 
-![Build Status](https://img.shields.io/badge/build-passing-brightgreen)
-![Deployment](https://img.shields.io/badge/deployment-production-blue)
-![Version](https://img.shields.io/badge/version-2.4.0--ENT-orange)
-![Security](https://img.shields.io/badge/security-TLS_1.3-success)
+  <br>
 
-> **Supply Chain Control and Operations Center.** 
+  <h3>Central Control Tower (v2.4.0-ENT)</h3>
+
+  <p>
+    <img src="https://img.shields.io/badge/build-passing-brightgreen" alt="Build Status" />
+    <img src="https://img.shields.io/badge/deployment-production-blue" alt="Deployment" />
+    <img src="https://img.shields.io/badge/version-2.4.0--ENT-orange" alt="Version" />
+    <img src="https://img.shields.io/badge/security-TLS_1.3-success" alt="Security" />
+  </p>
+</div>
+
+<br>
+
+> **Supply Chain Control and Operations Center.**  
 > Enterprise platform deployed for the logistics orchestration of *Draybyte Logistics Group*. This system centralizes real-time satellite fleet telemetry, shipment traceability, multi-hub inventory management, and dispatch optimization for heavy freight and cross-border corridors (LATAM / US-MX).
 
-🌍 **[View Live Platform (Production) 🟢]** *https://draybyte.vercel.app/*
+<br>
 
-![Draybyte Control Tower Preview](https://github.com/user-attachments/assets/ea0256cf-1eb0-4aed-9dad-ae3a62f7cea4)
-
----
+<div align="center">
+  <h3>🌍 <b><a href="https://draybyte.vercel.app/">View Live Platform (Production) 🟢</a></b></h3>
+  <br>
+  <img alt="Draybyte Preview" src="https://github.com/user-attachments/assets/ea0256cf-1eb0-4aed-9dad-ae3a62f7cea4" width="80%" />
+</div>
 
 ## 🎥 Real-Time Operations Demo
 
