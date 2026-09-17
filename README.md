@@ -15,8 +15,8 @@
 
 <br>
 
-> **Supply Chain Control and Operations Center.**  
-> Enterprise platform deployed for the logistics orchestration of *Draybyte Logistics Group*. This system centralizes real-time satellite fleet telemetry, shipment traceability, multi-hub inventory management, and dispatch optimization for heavy freight and cross-border corridors (LATAM / US-MX).
+> **Logistics Operations Dashboard & Fleet Tracking Interface.**  
+> A client-side logistics management interface and operational dashboard developed for freight tracking scenarios. The application organizes simulated telemetry feeds, shipment milestones, multi-warehouse inventory levels, and route planning assistance within a cohesive, responsive web workspace.
 
 <br>
 
@@ -29,7 +29,7 @@
 ## 🎥 Real-Time Operations Demo
 
 **🎬 Control Panel & Logistics Telemetry**  
-Control tower interface walkthrough: satellite fleet monitoring, shipment orchestration, and incident response handling in a high-performance supply chain.
+Operations dashboard walkthrough: fleet telemetry monitoring, shipment status tracking, inventory overview, and incident logging within a responsive client interface.
 
 https://github.com/user-attachments/assets/1d45d08c-6670-4b60-a5c8-10875b2854ee
 
@@ -37,43 +37,43 @@ https://github.com/user-attachments/assets/1d45d08c-6670-4b60-a5c8-10875b2854ee
 
 ## 🏗️ System Architecture & Tech Stack
 
-This repository contains the client application architecture (Web/Edge), optimized for high availability and real-time data rendering. *(Note: Due to corporate security policies, repositories for backend microservices, IoT integrations, and databases remain private).*
+This repository focuses on the frontend application architecture (Web/Edge), organizing real-time dashboard layouts, interactive maps, and operational metrics into modular components. *(Note: Production backend services, hardware IoT brokers, and private databases are simulated client-side to offer an independent, self-contained demonstration).*
 
-- **Core & Runtime (Edge-Optimized):**
-  - `react` (`^19.0.0`) & `react-dom`
-  - `typescript` (`~5.7.2`) for enterprise-grade strict typing.
-  - `vite` (`^6.2.0`) for ultra-fast compilation.
+- **Core & Runtime:**
+  - `react` (`^19.0.0`) & `react-dom` for responsive, component-driven UI rendering.
+  - `typescript` (`~5.7.2`) providing static typing across telemetry events, route coordinates, and shipment records.
+  - `vite` (`^6.2.0`) for fast local compilation and optimized bundling.
 - **User Interface (UI) & Styling:**
-  - `tailwindcss` (`^4.0.9`) with atomic architecture.
-  - `lucide-react` for standardized technical iconography.
-  - `clsx` & `tailwind-merge` for conditional component rendering.
-- **Telemetry & Analytics Visualization:**
-  - `recharts` (`^2.15.1`) for OTD (On-Time Delivery) dashboards.
-- **AI Engine & Optimization:**
-  - Native integration with `@google/genai` (`^2.4.0`) for the *Neural Dispatch Core*.
+  - `tailwindcss` (`^4.0.9`) with a component-driven styling architecture.
+  - `lucide-react` for clean, consistent technical iconography.
+  - `clsx` & `tailwind-merge` for conditional class management and style consistency.
+- **Telemetry & Data Visualization:**
+  - `recharts` (`^2.15.1`) for responsive delivery performance (OTD) and fleet metric charts.
+- **Assisted Dispatch & Routing:**
+  - Integration with `@google/genai` (`^2.4.0`) for route suggestions and cargo dispatch assistance.
 
 ---
 
 ## 🚀 Operational Modules (Deployed)
 
-1. **📡 Satellite Fleet Control Tower (`FleetMonitor`)**
-   - Real-time IoT telemetric data ingestion: instant speed, fuel level, cold chain temperature, and GPS latency (0.4ms).
-   - Dynamic re-routing and ETA recalculation.
+1. **📡 Fleet Monitoring Dashboard (`FleetMonitor`)**
+   - Visualization of simulated vehicle telemetry: speed, fuel readings, cargo compartment temperatures, and estimated transit coordinates.
+   - Interactive re-routing simulation and ETA updates.
 
-2. **📦 Shipment Orchestration & Customs (`ShipmentManager`)**
-   - Strict tracking of Waybill / Carta Porte, container codes, and SAT CFDI 4.0 customs manifests.
-   - Immutable event logs with timestamps, GPS coordinates, and barcode scanner integration.
+2. **📦 Shipment Tracking & Documentation (`ShipmentManager`)**
+   - Structured overview of consignment waybills, container identifiers, and compliance documentation.
+   - Chronological event timeline with status checkpoints and barcode lookup support.
 
-3. **🏭 Multi-Hub Inventory Management (`InventoryManager`)**
-   - Global stock visibility across multiple distribution centers (CDMX, GDL, MTY).
-   - Automated allocation system and stockout alerts.
+3. **🏭 Multi-Hub Inventory Overview (`InventoryManager`)**
+   - Stock visibility across regional distribution nodes (CDMX, GDL, MTY).
+   - Category-based inventory counters and minimum reorder alert indicators.
 
-4. **⚠️ Incident Command Center (`IncidentsManager`)**
-   - Monitoring of road closures, security alerts (panic button), and thermal anomalies in refrigerated cargo.
-   - Assisted resolution protocols and live operational KPI adjustments.
+4. **⚠️ Operational Alerts & Incidents (`IncidentsManager`)**
+   - Status log tracking route disruptions, weather warnings, and temperature deviations.
+   - Standardized incident resolution checklist and severity classifications.
 
-5. **🧠 Neural Dispatch Core (`RouteOptimizerAI`)**
-   - AI-powered route optimizer for load balancing, bottleneck mitigation, and fuel savings maximization.
+5. **🧠 Route Planning Assistant (`RouteOptimizerAI`)**
+   - Contextual recommendation module to assist dispatchers with delivery sequencing, load balancing, and route suggestions.
 
 ---
 
@@ -93,7 +93,7 @@ npm install
 ```
 
 ### 3. Environment Configuration
-Clone the base configuration file. To enable the Neural Dispatch Core module, inject the corresponding API key.
+Clone the base configuration file. To enable the dispatch assistance module, add the corresponding API key.
 ```bash
 cp .env.example .env
 ```
@@ -111,4 +111,4 @@ npm run build
 ```
 
 ---
-*Draybyte Logistics Group Intellectual Property © 2026. Operating System.*
+*Draybyte Logistics Group Intellectual Property © 2026. Technical Demonstration Project.*
